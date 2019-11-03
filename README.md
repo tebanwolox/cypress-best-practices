@@ -1,4 +1,4 @@
-# Wolox Cypress Standards and best practices
+# Estándares y buenas practicas para hacer testing con Cypress
 
 <h1 align="center">
   <img src="https://img.stackshare.io/service/9231/pXI1GDHW_400x400.jpg" alt="Cypress Best Practices">
