@@ -4,8 +4,8 @@
   <img src="https://img.stackshare.io/service/9231/pXI1GDHW_400x400.jpg" alt="Cypress Best Practices">
 </h1>
 
-   - [1- Objective](#1--objective)
-   - [2- Selectors](#2--Selectors)
+   - [1- Objetivo](#1--Objetivo)
+   - [2- Selectores](#2--Selectores)
    - [3- Atributo de tipo data](#3--Atributo-de-tipo-data)
    - [4- cy.contains()](#4--cy.contains())
    - [5- Sitios externos](#5--Sitios-externos)
@@ -20,7 +20,7 @@ El propósito de este documento es presentar estándares de uso en Wolox para tr
 
 &nbsp;
 
-## 2- Selectors
+## 2- Selectores
 
 Para los seleccionar objetos del DOM con cypress, una mala práctica es usar para todo selectores que son susceptibles a cambiar como por ejemplo: id, clases, tags o texto que no es estático. Para solucionar este problema se puede agregar el data-* atributo en el html, esto nos ayuda a obtener los elementos precisos.
 
