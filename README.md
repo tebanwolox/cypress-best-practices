@@ -121,10 +121,10 @@ Siempre debemos tratar de no duplicar código, un ejemplo es cuando cada test ne
 
 ## 9- Referencias
 
-   [Best Pracrices](https://docs.cypress.io/guides/references/best-practices.html)
-   [I see your point, but](https://www.youtube.com/watch?v=5XQOK0v_YRE)
-   [Testing The Way It Should Be (aka Intro Into Cypress)](https://www.youtube.com/watch?v=pJ349YntoIs&t=1900s)
-   [End-to-End testing with Cypress](https://medium.com/better-practices/end-to-end-testing-with-cypress-bfcd59633f1a)
+  - [Best Pracrices](https://docs.cypress.io/guides/references/best-practices.html)
+  - [I see your point, but](https://www.youtube.com/watch?v=5XQOK0v_YRE)
+  - [Testing The Way It Should Be (aka Intro Into Cypress)](https://www.youtube.com/watch?v=pJ349YntoIs&t=1900s)
+  - [End-to-End testing with Cypress](https://medium.com/better-practices/end-to-end-testing-with-cypress-bfcd59633f1a)
 
 ## About
 
