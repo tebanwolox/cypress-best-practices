@@ -22,7 +22,7 @@ El propósito de este documento es presentar estándares de uso en Wolox para tr
 
 ## 2- Selectores
 
-Para los seleccionar objetos del DOM con cypress, una mala práctica es usar para todo selectores que son susceptibles a cambiar como por ejemplo: id, clases, tags o texto que no es estático. Para solucionar este problema se puede agregar el data-* atributo en el html, esto nos ayuda a obtener los elementos precisos.
+Para los seleccionar objetos del DOM con cypress, una mala práctica es usar selectores que son susceptibles a cambiar como por ejemplo: id, clases, tags o texto que no es estático. Para solucionar este problema se puede agregar el data-* atributo en el html, esto nos ayuda a obtener los elementos precisos.
 
 ```html
 <button id="main" class="btn btn-large" role="button" data-cy="submit">Submit</button>
@@ -32,33 +32,33 @@ Para este ejemplo usar
 
 - ```javascript cy.get('button').click()``` es el peor de los casos debido a que es demasiado genérico.
 - ```javascript cy.get('.btn.btn-large').click()``` las clases son susceptibles a cambiar.
-- ```javascript cy.get('#main').click()```	Aunque el id no suele cambiar tanto, también se puede hacer por medio de Javascript. No recomendado
-- ```javascript cy.contains('Submit').click()``` Se podría usar si estamos seguros que el contenido no cambia y además es único.
+- ```javascript cy.get('#main').click()```	Aunque el id no suele cambiar frecuentemente, no es recomendado.
+- ```javascript cy.contains('Submit').click()``` Se podría usar si estamos seguros que el contenido no cambia y además solo apunta a un objeto del DOM.
 - ```javascript cy.get('[data-cy=submit]').click()``` Esta opción asegura que siempre se tendrá el mismo objeto.
 
 &nbsp;
 
 ## 3- Atributo de tipo data
 
-Siempre debemos usar para pruebas con cypress en el html atributos de tipo data, en este caso estos deben estar definidos de así: ```hmtl data-cy=””```
+Siempre debemos usar para pruebas con cypress en el html atributos de tipo data, en este caso estos deben estar definidos de así: ```data-cy=””```
 
 &nbsp;
 
 ## 4- cy.contains()
 
-Para saber cuando usar cy.contains(), debemos de preguntarnos lo siguiente. ¿Si el contenido del elemento cambia nos gustaría la prueba falle?. Si la respuesta es positiva entonces debemos usar cy.contains(), en otro caso tratar de usar un atributo de tipo data.
+Para saber cuando usar cy.contains(), debemos de preguntarnos lo siguiente. ¿Si el contenido del elemento cambia, nos gustaría la prueba fallara?. Si la respuesta es positiva entonces debemos usar cy.contains(), en otro caso tratar de usar un atributo de tipo data.
 
 &nbsp;
 
 ## 5- Sitios externos
 
-No se debe interactuar con sitios o servidores de los cuales no tenemos control. Para este tipo de situaciones se puede creer que la solución es ```javascript cy.visit()```, pero esto lleva a muchos problemas como de consumo, la prueba dependerá de los cambios de un agente externo o el sitio externo puede bloquear los testing. 
+No se debe interactuar con sitios o servidores de los cuales no tenemos control. Para este tipo de situaciones se puede creer que la solución es ```cy.visit()```, pero esto lleva a muchos problemas como por ejemplo de consumo, que la prueba dependa de los cambios de un agente externo o el sitio externo puede bloquear los testing. 
 
 &nbsp;
 
 ## 6- Logging
 
-Podemos usar Stub para hacer creer a nuestra aplicación que hicimos un logging exitoso, o si necesitamos un token real del servidor siempre podemos usar ```javascript cy.request()```. (Ver video)[https://www.youtube.com/watch?v=5XQOK0v_YRE].
+Podemos usar Stub para hacer creer a nuestra aplicación que hicimos un logging exitoso, o si necesitamos un token real del servidor siempre podemos usar ```cy.request()```. [Ver video](https://www.youtube.com/watch?v=5XQOK0v_YRE).
 
 &nbsp;
 
@@ -68,7 +68,7 @@ Podemos usar Stub para hacer creer a nuestra aplicación que hicimos un logging 
 Los test siempre deben de ser independientes y no debe importar si otro falla para que este se ejecute de manera normal.
 
 ```javascript
-   // an example of what NOT TO DO
+// an example of what NOT TO DO
 describe('my form', function () {
   it('visits the form', function () {
     cy.visit('/users/new')
@@ -89,24 +89,24 @@ describe('my form', function () {
 
 ```
 
-En el ejemplo anterior cada prueba depende del anterior para que esta funcione, lo cual no nos da el componente de independencia que requiere cada vez. En este caso se debería hacer un solo test como el siguiente:
+En el ejemplo anterior cada prueba depende del anterior para que esta funcione. En este caso se debería hacer un solo test como el siguiente y así mantener la independencia para cada test:
 
 ```javascript
-   // a bit better
-    describe('my form', function () {
-    it('can submit a valid form', function () {
-        cy.visit('/users/new')
+// a bit better
+describe('my form', function () {
+  it('can submit a valid form', function () {
+    cy.visit('/users/new')
 
-        cy.log('filling out first name') // if you really need this
-        cy.get('#first').type('Johnny')
+    cy.log('filling out first name') // if you really need this
+    cy.get('#first').type('Johnny')
 
-        cy.log('filling out last name') // if you really need this
-        cy.get('#last').type('Appleseed')
+    cy.log('filling out last name') // if you really need this
+    cy.get('#last').type('Appleseed')
 
-        cy.log('submitting form') // if you really need this
-        cy.get('form').submit()
-    })
-    })
+    cy.log('submitting form') // if you really need this
+    cy.get('form').submit()
+  })
+})
 
 ```
 
@@ -114,17 +114,17 @@ En el ejemplo anterior cada prueba depende del anterior para que esta funcione, 
 
 ## 8- Usar código compartido en los test
 
-Siempre debemos tratar de no duplicar código, si cada test necesita ejecutar la misma acción al principio, sería una buena práctica poner estos pasos repetitivos en una función ```javascript beforeEach()``` la cual se ejecutará antes de cada prueba.
+Siempre debemos tratar de no duplicar código, un ejemplo es cuando cada test necesita ejecutar la misma acción al principio, sería una buena práctica poner estos pasos repetitivos en una función ```beforeEach()``` la cual se ejecutará antes de cada prueba.
 
 &nbsp;
 
 
 ## 9- Referencias
 
-   [Best Pracrices]: <https://docs.cypress.io/guides/references/best-practices.html>
-   [I see your point, but]: <https://www.youtube.com/watch?v=5XQOK0v_YRE>
-   [Testing The Way It Should Be (aka Intro Into Cypress)]: <https://www.youtube.com/watch?v=pJ349YntoIs&t=1900s>
-   [End-to-End testing with Cypress]: <https://medium.com/better-practices/end-to-end-testing-with-cypress-bfcd59633f1a>
+   [Best Pracrices](https://docs.cypress.io/guides/references/best-practices.html)
+   [I see your point, but](https://www.youtube.com/watch?v=5XQOK0v_YRE)
+   [Testing The Way It Should Be (aka Intro Into Cypress)](https://www.youtube.com/watch?v=pJ349YntoIs&t=1900s)
+   [End-to-End testing with Cypress](https://medium.com/better-practices/end-to-end-testing-with-cypress-bfcd59633f1a)
 
 ## About
 
