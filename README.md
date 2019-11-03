@@ -1,7 +1,7 @@
 # Wolox Cypress Standards and best practices
 
 <h1 align="center">
-  <img src="hhttps://www.cypress.io/static/33498b5f95008093f5f94467c61d20ab/c0bf4/cypress-logo.webp" alt="Cypress Best Practices">
+  <img src="https://img.stackshare.io/service/9231/pXI1GDHW_400x400.jpg" alt="Cypress Best Practices">
 </h1>
 
    - [1- Objective](#1--objective)
